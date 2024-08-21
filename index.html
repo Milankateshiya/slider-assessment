@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Carousel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #2b2b2b;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .carousel-container {
+        max-width: 800px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .carousel {
+        position: relative;
+      }
+
+      .carousel-inner {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+      }
+
+      .carousel-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 100;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+      .carousel-thumbnails {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .carousel-thumbnails .thumb {
+        width: 60px;
+        margin: 0 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: transform 0.3s;
+      }
+
+      .carousel-thumbnails .thumb:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carousel-container">
+      <div class="carousel">
+        <button class="carousel-control prev" onclick="moveSlide(-1)">
+          &#10094;
+        </button>
+        <div class="carousel-inner">
+          <div class="carousel-slide">
+            <img
+              src="https://img.freepik.com/free-photo/fresh-coffee-steams-wooden-table-close-up-generative-ai_188544-8923.jpg"
+              alt="Image 1"
+            />
+          </div>
+          <div class="carousel-slide">
+            <img
+              src="https://esquirescoffee.co.uk/wp-content/uploads/2021/09/mike-kenneally-tNALoIZhqVM-unsplash.jpg"
+              alt="Image 2"
+            />
+          </div>
+          <div class="carousel-slide">
+            <img
+              src="https://insurancemarket.ae/wp-content/uploads/2024/01/image-7.jpeg"
+              alt="Image 3"
+            />
+          </div>
+          <div class="carousel-slide">
+            <img
+              src="https://t4.ftcdn.net/jpg/01/16/61/93/360_F_116619399_YA611bKNOW35ffK0OiyuaOcjAgXgKBui.jpg"
+              alt="Image 4"
+            />
+          </div>
+          <div class="carousel-slide">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Latte_and_dark_coffee.jpg/640px-Latte_and_dark_coffee.jpg"
+              alt="Image 5"
+            />
+          </div>
+        </div>
+        <button class="carousel-control next" onclick="moveSlide(1)">
+          &#10095;
+        </button>
+      </div>
+      <div class="carousel-thumbnails">
+        <img
+          class="thumb"
+          src="https://img.freepik.com/free-photo/fresh-coffee-steams-wooden-table-close-up-generative-ai_188544-8923.jpg"
+          onclick="currentSlide(1)"
+          alt="Thumbnail 1"
+        />
+        <img
+          class="thumb"
+          src="https://esquirescoffee.co.uk/wp-content/uploads/2021/09/mike-kenneally-tNALoIZhqVM-unsplash.jpg"
+          onclick="currentSlide(2)"
+          alt="Thumbnail 2"
+        />
+        <img
+          class="thumb"
+          src="https://insurancemarket.ae/wp-content/uploads/2024/01/image-7.jpeg"
+          onclick="currentSlide(3)"
+          alt="Thumbnail 3"
+        />
+        <img
+          class="thumb"
+          src="https://t4.ftcdn.net/jpg/01/16/61/93/360_F_116619399_YA611bKNOW35ffK0OiyuaOcjAgXgKBui.jpg"
+          onclick="currentSlide(4)"
+          alt="Thumbnail 4"
+        />
+        <img
+          class="thumb"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Latte_and_dark_coffee.jpg/640px-Latte_and_dark_coffee.jpg"
+          onclick="currentSlide(5)"
+          alt="Thumbnail 5"
+        />
+      </div>
+    </div>
+    <script>
+      // JavaScript code for image slider
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        const slides = document.querySelectorAll(".carousel-slide");
+        const totalSlides = slides.length;
+
+        // Ensure index is within bounds
+        if (index >= totalSlides) {
+          currentIndex = 0;
+        } else if (index < 0) {
+          currentIndex = totalSlides - 1;
+        } else {
+          currentIndex = index;
+        }
+
+        const offset = -currentIndex * 100;
+        document.querySelector(
+          ".carousel-inner"
+        ).style.transform = `translateX(${offset}%)`;
+      }
+
+      function moveSlide(step) {
+        showSlide(currentIndex + step);
+      }
+
+      function currentSlide(index) {
+        showSlide(index - 1); // Adjust index for 0-based array
+      }
+
+      // Initial display
+      showSlide(currentIndex);
+
+      // Optional: Automatic slide transition (every 5 seconds)
+      setInterval(() => {
+        moveSlide(1);
+      }, 5000);
+    </script>
+  </body>
+</html>
